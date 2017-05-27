@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <title>Test</title>
+    <link rel="stylesheet" href="content/bootstrap.css"/>
+    <link rel="stylesheet" href="content/styles.css"/>
+    <link rel="stylesheet" href="content/animations.css"/>
+</head>
+<body class="container">
+<style>
+    .border-rojo{
+        border:2px solid red;
+    }
+</style>
+    <header class="navbar navbar-inverse navbar-fixed-top ani-nav" role="banner">
+        <div class="navbar-header">
+            <a href="http://github.com/emmanuelhcpk" class="navbar-brand">Emmanuel Velez</a>
+            <a href="#" class="navbar-brand">Test Bancolombia</a>
+        </div>
+    </header>
+    
+    <div class="example-animate-container">
+    <div ng-view=""></div>
+    <div ng-controller="TableController as vm">
+        <h2>{{vm.title}}</h2>
+    <div>
+        <label>Filtro</label>
+        <input class="form-control" data-ng-model="personFilter"/>
+    </div>
+
+    <div style="overflow-y:scroll ;max-height: 300px;" scrollable="vm.test()">
+    <table class="table table-bordered table-striped table-condensed" >
+        <thead>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Combo</th>
+        <th>Input1</th>
+        <th>Input2 numerico</th>
+        <th>Input3</th>
+        <th>Input4 numerico</th>
+        <th>Input5</th>
+        <th>Valor $</th>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="p in vm.tabla | filter:personFilter">
+            <td>{{p.first}}</td>
+            <td>{{p.last}}</td>
+            <td><select name="" id="" class="form-control" ng-model="p.switch">
+                <option value="">--------</option>
+                <option value="opc1">op1</option>
+                <option value="opc2">op2</option>
+                <option value="opc3">op3</option>
+            </select></td>
+            <td><input type="text" class="form-control" ng-model="p.i1" ng-disabled="p.switch != 'opc1' " ng-class="{ 'border-rojo': !p.i1 && p.switch == 'opc1' }"></td>
+            <td><input type="number" class="form-control" ng-model="p.i2" ng-disabled="p.switch != 'opc2' " ></td>
+            <td><input type="text" class="form-control" ng-model="p.i3" ng-disabled="p.switch != 'opc3' "></td>
+            <td><input type="number" class="form-control" ng-model="p.i4" ng-disabled="p.switch != 'opc1' "></td>
+            <td><input type="text" class="form-control" ng-model="p.i5" ng-disabled="p.switch != 'opc2' "></td>
+
+
+            <td>{{p.lunchMoney | currency}}</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <script src="scripts/jquery-2.0.3.js"></script>
+    <script src="scripts/bootstrap.js"></script>
+    <script src="scripts/angular.js"></script>
+    <script src="scripts/angular-route.js"></script>
+    <script src="scripts/angular-animate.js"></script>
+
+    <script src="app/app.module.js"></script>
+    <script src="app/controller/cont.controller.js"></script>
+    <script src="app/controller/people.service.js"></script>
+</body>
+</html>
